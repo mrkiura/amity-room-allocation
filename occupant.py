@@ -3,8 +3,8 @@
 class Occupant:
 
     '''
-    A class to model the room occupants,
-    Fellows or Staff
+    A class to model the room occupants-
+    fellows and staff
     '''
 
     def __init__(self, **kwargs):
