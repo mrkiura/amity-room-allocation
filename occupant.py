@@ -8,8 +8,8 @@ class Occupant:
     '''
 
     def __init__(self, **kwargs):
-        self.name = kwargs.name
-        self.job_type = kwargs.job_type
+        self.name = kwargs['name']
+        self.job_type = kwargs['job_type']
         self.room_name = ''
         self.allocated = False
 
