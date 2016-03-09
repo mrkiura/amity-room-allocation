@@ -10,7 +10,7 @@ class Room:
     def __init__(self, **kwargs):
         self.occupants = []
         self.name = kwargs['name']
-        self.type = kwargs['type']
+        self.usage = kwargs['usage']
         self.capacity = kwargs['capacity']
 
     def get_occupants(self, **options):

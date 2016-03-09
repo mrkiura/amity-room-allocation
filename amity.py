@@ -10,6 +10,10 @@ class Amity:
 
     def __init__(self):
         self.rooms = []
+        # populate the class model on instantiation
+        self.populate()
+        import ipdb
+        ipdb.set_trace()
 
     def allocate(self, people):
         '''
@@ -36,10 +40,20 @@ class Amity:
         '''
         return self.allocations
 
-    def populate(self, rooms):
+    def populate(self):
         '''
         Populates the building with 10 office
         spaces and 10 living spaces from the input
         file
         '''
-        
+        for line in open('data/rooms.txt'):
+            line = line.strip()
+            name, usage = line.split(' ')
+            if usage == 'O':
+                usage = 'OFFICE'
+                capacity = 6
+            else:
+                usage = 'LIVING'
+                capacity = 4
+            space = Room(name=name, usage=usage, capacity=capacity)
+            self.rooms.append(space)

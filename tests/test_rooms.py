@@ -7,7 +7,7 @@ from occupant import Occupant
 class RoomTest(unittest.TestCase):
 
     def setUp(self):
-        self.room = Room(name='Valhalla', capacity=6, type='office')
+        self.room = Room(name='Valhalla', capacity=6, usage='office')
 
     def test_room_get_room_capacity(self):
         result = self.room.get_room_capacity()
