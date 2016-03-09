@@ -42,3 +42,4 @@ class Amity:
         spaces and 10 living spaces from the input
         file
         '''
+        
