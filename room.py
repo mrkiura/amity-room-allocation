@@ -7,19 +7,19 @@ class Room:
     living or office
     '''
 
-    def __init__(self, *kwargs):
+    def __init__(self, **kwargs):
         self.occupants = []
         self.name = kwargs['name']
         self.type = kwargs['type']
         self.capacity = kwargs['capacity']
 
-    def get_occupants(self, *options):
+    def get_occupants(self, **options):
         '''
         Returns the people occupying a room
         '''
         # if option is number, return the number
         # of people occupying a room
-        if options['type'] == 'number':
+        if options['opt'] == 'number':
             return len(self.occupants)
         return self.occupants
 
@@ -30,6 +30,11 @@ class Room:
         # only add if there's space
         if not self.is_full():
             self.occupants.append(occupant)
+            # return true on successfully allocating
+            return True
+        else:
+            #     # return false on failed allocation
+            return False
 
     def is_full(self):
         '''

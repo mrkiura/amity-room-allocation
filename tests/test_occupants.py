@@ -5,6 +5,10 @@ from room import Room
 
 
 class OccupantsTest(unittest.TestCase):
-    def test_occupant_creation(self):
-        result = Occupant(name='Alex Kiura', job_type='fellow')
-        self.assertIsInstance(result, Occupant)
+    def setUp(self):
+        self.occupant = Occupant(name='Alex Kiura', job_type='fellow')
+
+    def test_occupant_get_job_type_result(self):
+        result = self.occupant.get_job_type()
+        self.assertEqual(result, 'fellow')
+        
