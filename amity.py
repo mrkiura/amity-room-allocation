@@ -11,29 +11,35 @@ class Amity:
 
     def __init__(self):
         self.rooms = []
-        # populate the class model on instantiation
+        self.occupants = []
+        # populate with rooms instanti
         self.populate()
-        # import ipdb
-        # ipdb.set_trace()
+        # populate with occupants
+        self.create_occupants()
+
+    def create_occupants(self):
+        '''
+        Reads occupant details from txt file
+        and store them as occupant objects
+        '''
+        # read occupant's info from the occupants.txt file
+        for line in open('data/occupants.txt'):
+            line = line.strip()
+            details = line.split()
+            if details[-1] == 'Y':
+                boarding = True
+            else:
+                boarding = False
+            occupant1 = Occupant(name=details[0] + ' ' + details[1],
+                                 job_type=details[2], boarding=boarding)
+            self.occupants.append(occupant1)
 
     def allocate(self):
         '''
         Allocates spaces to the people included in the
         input file
         '''
-        # read occupant's info from the occupants.txt file
-        for line in open('data/occupants.txt'):
-            line = line.strip()
-            fname, lname, job_type, boarding = line.split(' ')
-            if boarding == 'Y':
-                boarding = True
-            else:
-                boarding = False
-            occupant1 = Occupant(name=fname+' ' + lname,
-                                 job_type=job_type, boarding=boarding)
-
-
-        self.allocations = []
+        pass
 
     def get_available_rooms(self):
         '''

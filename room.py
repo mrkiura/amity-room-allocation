@@ -11,7 +11,10 @@ class Room:
         self.occupants = []
         self.name = kwargs['name']
         self.usage = kwargs['usage']
-        self.capacity = kwargs['capacity']
+        if self.usage == 'OFFICE':
+            self.capacity = 6
+        else:
+            self.capacity = 4
 
     def get_occupants(self, **options):
         '''
