@@ -11,10 +11,7 @@ class Room:
         self.occupants = []
         self.name = kwargs['name']
         self.usage = kwargs['usage']
-        if self.usage == 'OFFICE':
-            self.capacity = 6
-        else:
-            self.capacity = 4
+        self.capacity = kwargs['capacity']
 
     def __str__(self):
         '''
@@ -39,13 +36,14 @@ class Room:
         Adds a new occupant to the room
         '''
         # only add if there's space
-        if not self.is_full():
-            self.occupants.append(occupant)
-            # return true on successfully allocating
-            return True
-        else:
-            #     # return false on failed allocation
-            return False
+        # if self.is_not_full():
+        #     self.occupants.append(occupant)
+        #     # return true on successfully allocating
+        #     return True
+        # else:
+        #     #     # return false on failed allocation
+        #     return False
+        self.occupants.append(occupant)
 
     def is_not_full(self):
         '''

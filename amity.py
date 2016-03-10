@@ -1,26 +1,27 @@
 from room import Room
 from occupant import Occupant
-from occupant_gen import get_next
+from occupant_gen import Occupants
 
 
-class Amity:
+class Amity(object):
 
     '''
     A class to model the Amity building which
     contains the various living and office spaces
     '''
+    office_rooms = []
+    living_rooms = []
+    boarding_fellows = []
+    non_boarding_fellows = []
+    staff = []
+    allocations = []
 
     def __init__(self):
-        self.office_rooms = []
-        self.living_rooms = []
-        self.boarding_fellows = []
-        self.non_boarding_fellows = []
-        self.staff = []
-        self.allocations = []
         # populate with model with rooms
         self.populate()
         # populate model with occupants
         self.create_occupants()
+        # allocate the rooms to the potential occupants
         self.allocate()
 
     def create_occupants(self):
@@ -52,18 +53,21 @@ class Amity:
         # get the available spaces
         available_offices = self.get_available_offices()
         # first alloate the office spaces
+        occ = Occupants.next(staff=self.staff)
+        person = None
         for office in available_offices:
-            occ = get_next(self.staff)
-            while office.is_not_full:
+            while office.is_not_full() is True:
                 try:
-                    occ = get_next(self.staff)
-                    office.add_occupant(occ.next())
-
+                    person = occ.next()
+                    office.add_occupant(person)
                 except StopIteration:
                     print 'No more staff to allocate'
-                    return
-            import ipdb
-            ipdb.set_trace()
+                    break
+
+            print office
+            # update allocations if office has > 1 occupant
+            if len(office.occupants) > 0:
+                self.allocations.append(office)
 
     def get_available_offices(self):
         '''
@@ -94,8 +98,8 @@ class Amity:
                 if line:
                     name, usage = line.split(' ')
                     if usage == 'O':
-                        space = Room(name=name, usage=usage, capacit=6)
+                        space = Room(name=name, usage=usage, capacity=6)
                         self.office_rooms.append(space)
                     else:
-                        space = Room(name=name, usage=usage, capacit=4)
+                        space = Room(name=name, usage=usage, capacity=4)
                         self.living_rooms.append(space)

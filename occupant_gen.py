@@ -1,12 +1,11 @@
+class Occupants(object):
 
-
-def get_next(ls):
-    '''
-    Should return the next item on
-    the list ls
-    '''
-    max = len(ls)
-    cur = 0
-    while min <= max:
-        yield ls[cur]
-        cur += 1
+    @staticmethod
+    def next(staff):
+        '''
+        Should return the next item on
+        the list ls
+        '''
+        if len(staff) > 0:
+            for staff_member in staff:
+                yield staff_member
