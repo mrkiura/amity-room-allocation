@@ -1,5 +1,6 @@
 from room import Room
 from occupant import Occupant
+from occupant_gen import get_next
 
 
 class Amity:
@@ -15,10 +16,12 @@ class Amity:
         self.boarding_fellows = []
         self.non_boarding_fellows = []
         self.staff = []
+        self.allocations = []
         # populate with model with rooms
         self.populate()
         # populate model with occupants
         self.create_occupants()
+        self.allocate()
 
     def create_occupants(self):
         '''
@@ -46,15 +49,29 @@ class Amity:
         Allocates spaces to fellows and staff
         input file
         '''
-        pass
+        # get the available spaces
+        available_offices = self.get_available_offices()
+        # first alloate the office spaces
+        for office in available_offices:
+            occ = get_next(self.staff)
+            while office.is_not_full:
+                try:
+                    occ = get_next(self.staff)
+                    office.add_occupant(occ.next())
 
-    def get_available_rooms(self):
+                except StopIteration:
+                    print 'No more staff to allocate'
+                    return
+            import ipdb
+            ipdb.set_trace()
+
+    def get_available_offices(self):
         '''
-        Returns a list of rooms with spaces
+        Returns a list of office rooms with spaces
         '''
         available = []
-        for i in self.rooms:
-            if not i.is_full():
+        for i in self.office_rooms:
+            if i.is_not_full():
                 available.append(i)
         return available
 

@@ -39,12 +39,12 @@ class Room:
             #     # return false on failed allocation
             return False
 
-    def is_full(self):
+    def is_not_full(self):
         '''
         Returns True for a room with the
         maximum no. of occupants
         '''
-        return len(self.occupants) >= self.capacity
+        return len(self.occupants) < self.capacity
 
     def get_room_details(self):
         '''
@@ -66,3 +66,9 @@ class Room:
         for living spaces
         '''
         return self.usage
+
+    def get_vacant_spaces(self):
+        '''
+        Returns the remaining spaces in a room
+        '''
+        return self.capacity - len(self.occupants)
