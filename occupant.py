@@ -10,7 +10,6 @@ class Occupant:
     def __init__(self, **kwargs):
         self.name = kwargs['name']
         self.job_type = kwargs['job_type']
-        self.boarding = kwargs['boarding']
         self.room_name = ''
         self.allocated = False
 

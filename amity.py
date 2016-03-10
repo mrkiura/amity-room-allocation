@@ -10,11 +10,14 @@ class Amity:
     '''
 
     def __init__(self):
-        self.rooms = []
-        self.occupants = []
-        # populate with rooms instanti
-        self.populate()
-        # populate with occupants
+        self.office_rooms = []
+        self.living_rooms = []
+        self.boarding_fellows = []
+        self.non_boarding_fellows = []
+        self.staff = []
+        # populate with model with rooms
+        # self.populate()
+        # populate model with occupants
         self.create_occupants()
 
     def create_occupants(self):
@@ -23,20 +26,26 @@ class Amity:
         and store them as occupant objects
         '''
         # read occupant's info from the occupants.txt file
-        for line in open('data/occupants.txt'):
-            line = line.strip()
-            details = line.split()
-            if details[-1] == 'Y':
-                boarding = True
-            else:
-                boarding = False
-            occupant1 = Occupant(name=details[0] + ' ' + details[1],
-                                 job_type=details[2], boarding=boarding)
-            self.occupants.append(occupant1)
+        with open('data/occupants.txt', 'r') as doc:
+            for line in doc.readlines():
+                line = line.strip()
+                if line:
+                    print 'line', line
+                    details = line.split()
+                    print details
+                    occupant1 = Occupant(name=details[0] + ' ' + details[1],
+                                         job_type=details[2])
+                    if details[2] == 'FELLOW':
+                        if details[-1] == 'Y':
+                            self.boarding_fellows.append(occupant1)
+                        else:
+                            self.non_boarding_fellows.append(occupant1)
+                    else:
+                        self.staff.append(occupant1)
 
     def allocate(self):
         '''
-        Allocates spaces to the people included in the
+        Allocates spaces to fellows and staff
         input file
         '''
         pass
@@ -65,7 +74,7 @@ class Amity:
         file
         '''
         for line in open('data/rooms.txt'):
-            line = line.strip()
+            # line = line.strip()
             name, usage = line.split(' ')
             if usage == 'O':
                 usage = 'OFFICE'
