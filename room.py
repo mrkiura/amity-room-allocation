@@ -16,6 +16,14 @@ class Room:
         else:
             self.capacity = 4
 
+    def __str__(self):
+        '''
+        Returns a readable string representation
+        of the object
+        '''
+        return ('({0}, {1}, {2})'.format(self.name,
+                                         self.capacity, self.occupants))
+
     def get_occupants(self, **options):
         '''
         Returns the people occupying a room
