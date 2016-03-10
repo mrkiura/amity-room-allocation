@@ -16,7 +16,7 @@ class Amity:
         self.non_boarding_fellows = []
         self.staff = []
         # populate with model with rooms
-        # self.populate()
+        self.populate()
         # populate model with occupants
         self.create_occupants()
 
@@ -30,9 +30,7 @@ class Amity:
             for line in doc.readlines():
                 line = line.strip()
                 if line:
-                    print 'line', line
                     details = line.split()
-                    print details
                     occupant1 = Occupant(name=details[0] + ' ' + details[1],
                                          job_type=details[2])
                     if details[2] == 'FELLOW':
@@ -73,14 +71,14 @@ class Amity:
         spaces and 10 living spaces from the input
         file
         '''
-        for line in open('data/rooms.txt'):
-            # line = line.strip()
-            name, usage = line.split(' ')
-            if usage == 'O':
-                usage = 'OFFICE'
-                capacity = 6
-            else:
-                usage = 'LIVING'
-                capacity = 4
-            space = Room(name=name, usage=usage, capacity=capacity)
-            self.rooms.append(space)
+        with open('data/rooms.txt') as rooms:
+            for line in rooms.readlines():
+                line = line.strip()
+                if line:
+                    name, usage = line.split(' ')
+                    if usage == 'O':
+                        space = Room(name=name, usage=usage, capacit=6)
+                        self.office_rooms.append(space)
+                    else:
+                        space = Room(name=name, usage=usage, capacit=4)
+                        self.living_rooms.append(space)
