@@ -56,3 +56,10 @@ class Room:
         Returns the capacity of the room
         '''
         return self.capacity
+
+    def get_room_usage(self):
+        '''
+        Returns office for office spaces and living
+        for living spaces
+        '''
+        return self.usage
