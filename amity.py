@@ -20,6 +20,7 @@ class Amity:
         Allocates spaces to the people included in the
         input file
         '''
+        # read occupant's info from the occupants.txt file
         self.allocations = []
         pass
 
