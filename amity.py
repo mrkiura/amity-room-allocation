@@ -47,36 +47,52 @@ class Amity(object):
 
     def allocate(self):
         '''
-        Allocates spaces to fellows and staff
-        input file
+        Calls the methods to randomly allocate
+        rooms to people
         '''
-        # get the available spaces
-        available_offices = self.get_available_offices()
-        # first alloate the office spaces
-        occ = Occupants.next(staff=self.staff)
+        # allocate offices to fellows and staff
+        available_offices = self.get_available_rooms('OFFICE')
+        self.allocate_rooms(available_offices, self.staff +
+                            self.boarding_fellows + self.non_boarding_fellows)
+
+        # allocate rooms to boarding fellows
+        available_living_rooms = self.get_available_rooms('LIVING')
+        self.allocate_rooms(available_living_rooms, self.boarding_fellows)
+
+    def allocate_rooms(self, rooms, people):
+        '''
+        Allocates rooms to the list of people
+        '''
+        next_person = Occupants.next(people)
         person = None
-        for office in available_offices:
-            while office.is_not_full() is True:
+        for room in rooms:
+            while room.is_not_full():
                 try:
-                    person = occ.next()
-                    office.add_occupant(person)
+                    person = next_person()
+                    room.add_occupant(person)
                 except StopIteration:
                     print 'No more staff to allocate'
                     break
 
-            print office
-            # update allocations if office has > 1 occupant
-            if len(office.occupants) > 0:
-                self.allocations.append(office)
+            # update allocations if room has > 1 occupant
+            if len(room.occupants) > 0:
+                self.allocations.append(room)
 
-    def get_available_offices(self):
+    def get_available_rooms(self, usage):
         '''
-        Returns a list of office rooms with spaces
+        Returns a list of rooms based on usage
+        e.g, returns a list of office spaces
+        if usage == 'OFFICE'
         '''
         available = []
-        for i in self.office_rooms:
-            if i.is_not_full():
-                available.append(i)
+        if usage == 'OFFICE':
+            for i in self.office_rooms:
+                if i.is_not_full():
+                    available.append(i)
+        else:
+            for i in self.living_rooms:
+                if i.is_not_full():
+                    available.append(i)
         return available
 
     def get_allocations(self):
