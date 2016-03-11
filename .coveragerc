@@ -8,5 +8,8 @@ omit=
     *__init__*
     *tests/*
 
+exclude_lines =
+    if __name__ == .__main__.:
+
 [html]
 directory = coverage_html
