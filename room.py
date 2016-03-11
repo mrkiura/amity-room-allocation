@@ -21,29 +21,23 @@ class Room:
         return ('({0}, {1}, {2})'.format(self.name,
                                          self.capacity, self.occupants))
 
-    def get_occupants(self, **options):
+    def get_occupants(self):
         '''
-        Returns the people occupying a room
+        Returns a list of people occupying a room
         '''
-        # if option is number, return the number
-        # of people occupying a room
-        if options['opt'] == 'number':
-            return len(self.occupants)
         return self.occupants
 
     def add_occupant(self, occupant):
         '''
         Adds a new occupant to the room
         '''
-        # only add if there's space
-        # if self.is_not_full():
-        #     self.occupants.append(occupant)
-        #     # return true on successfully allocating
-        #     return True
-        # else:
-        #     #     # return false on failed allocation
-        #     return False
         self.occupants.append(occupant)
+
+    def is_empty(self):
+        '''
+        Returns True for an empty room
+        '''
+        return len(self.occupants) == 0
 
     def is_not_full(self):
         '''
