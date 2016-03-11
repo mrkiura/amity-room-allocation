@@ -141,6 +141,8 @@ class Amity(object):
         are not allocated to any rooms
         '''
         allocated = []
-        for room in self.allocated:
+        for room in allocated:
             allocated += room.occupants
-        return list(set(self.occupants) - set(allocated))
+        return list(set(
+            self.staff + self.boarding_fellows +
+            self.non_boarding_fellows) - set(allocated))
