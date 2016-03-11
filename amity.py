@@ -1,3 +1,4 @@
+from __future__ import print_function
 from room import Room
 from occupant import Occupant
 from occupant_gen import Occupants
@@ -50,9 +51,12 @@ class Amity(object):
         Calls the methods to randomly allocate
         rooms to people
         '''
-        # allocate offices to fellows and staff
-        available_offices = self.get_available_rooms('OFFICE')
-        self.allocate_rooms(available_offices, self.staff +
+        # give staff offices that are closer together
+        available_staff_offices = self.get_available_rooms('OFFICE')
+        self.allocate_rooms(available_staff_offices, self.staff)
+        # give fellows offices that are closer together
+        available_fellow_offices = self.get_available_rooms('OFFICE')
+        self.allocate_rooms(available_fellow_offices,
                             self.boarding_fellows + self.non_boarding_fellows)
 
         # allocate rooms to boarding fellows
@@ -68,10 +72,10 @@ class Amity(object):
         for room in rooms:
             while room.is_not_full():
                 try:
-                    person = next_person()
+                    person = next_person.next()
                     room.add_occupant(person)
                 except StopIteration:
-                    print 'No more staff to allocate'
+                    print('No more staff to allocate')
                     break
 
             # update allocations if room has > 1 occupant
@@ -114,8 +118,30 @@ class Amity(object):
                 if line:
                     name, usage = line.split(' ')
                     if usage == 'O':
+                        usage = 'OFFICE'
                         space = Room(name=name, usage=usage, capacity=6)
                         self.office_rooms.append(space)
                     else:
+                        usage = 'LIVING'
                         space = Room(name=name, usage=usage, capacity=4)
                         self.living_rooms.append(space)
+
+    def print_allocations(self):
+        '''
+        Prints a room and the occupants in that room
+        '''
+        for room in self.allocations:
+            print('{0} ({1})'.format(room.name, room.usage))
+            for person in room.occupants:
+                print(person.name, end=', ')
+            print('\n')
+
+    def get_unallocated(self):
+        '''
+        Returns a list of occupants who
+        are not allocated to any rooms
+        '''
+        allocated = []
+        for room in self.allocated:
+            allocated += room.occupants
+        return list(set(self.occupants) - set(allocated))
