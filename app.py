@@ -21,7 +21,7 @@ def init_app():
     return Amity()
 
 if __name__ == '__main__':
-    premise = Amity()
+    premise = init_app()
     arguments = docopt(__doc__, version='Amity Room Allocator 0.0.1')
     if arguments['allocate']:
         premise.allocate()
