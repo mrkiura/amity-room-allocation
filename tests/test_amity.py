@@ -59,8 +59,4 @@ class AmityTest(unittest.TestCase):
         self.assertIsInstance(
             self.building.get_unallocated(), list)
 
-    # def test_print_allocations(self):
-    #     '''
-    #     Tests printing allocations
-    #     '''
 

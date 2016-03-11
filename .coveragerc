@@ -10,6 +10,8 @@ omit=
 
 exclude_lines =
     if __name__ == .__main__.:
+    print_allocations
+    get_room_members
 
 [html]
 directory = coverage_html

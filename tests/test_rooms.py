@@ -23,3 +23,19 @@ class RoomTest(unittest.TestCase):
         self.room.add_occupant(self.occupant1)
         result = len(self.room.get_occupants())
         self.assertEqual(result, 1)
+
+    def test_room_repr(self):
+        '''
+        Tests a string representation of the object
+        '''
+        result = self.room.__str__()
+        self.assertIsInstance(result, str)
+
+    def test_get_room_details(self):
+        self.assertIsInstance(self.room.get_room_details(), dict)
+
+    def test_room_usage(self):
+        self.assertEqual(self.room.get_room_usage(), 'OFFICE')
+
+    def test_get_vacant_spaces(self):
+        self.assertEqual(self.room.get_vacant_spaces(), 6)

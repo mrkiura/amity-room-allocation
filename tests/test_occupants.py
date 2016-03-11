@@ -15,7 +15,7 @@ class OccupantsTest(unittest.TestCase):
 
     def test_occupant_repr(self):
         '''
-        Returns a string representation of the object
+        Tests a string representation of the object
         '''
         result = self.occupant.__str__()
         self.assertIsInstance(result, str)
