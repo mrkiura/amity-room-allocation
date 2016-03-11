@@ -1,5 +1,4 @@
 htmlcov
 .coverage
-.coveragerc
 .coveralls.yml
 coverage_html
