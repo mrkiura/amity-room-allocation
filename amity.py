@@ -146,3 +146,14 @@ class Amity(object):
         return list(set(
             self.staff + self.boarding_fellows +
             self.non_boarding_fellows) - set(allocated))
+
+    def get_room_members(self, room_name):
+        '''
+        Print list of room members
+        '''
+        for room in self.allocations:
+            if room.name == room_name:
+                print(room.name)
+                for i in room.occupants:
+                    print(i)
+        print('No such room found :(')
