@@ -46,4 +46,3 @@ class Occupant:
         returns the space allocated to the occupant
         '''
         return self.room_name
-

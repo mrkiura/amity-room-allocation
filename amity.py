@@ -75,7 +75,6 @@ class Amity(object):
                     person = next_person.next()
                     room.add_occupant(person)
                 except StopIteration:
-                    print('No more staff to allocate')
                     break
 
             # update allocations if room has > 1 occupant
