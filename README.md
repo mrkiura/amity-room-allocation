@@ -23,7 +23,9 @@ pip install -r requirements.txt
 ## Running
 Run ``` python app.py allocate ``` to allocate rooms to fellows and staff
 
-Run ``` python app.py see_allocations ``` to view people allocated to a room
+Run ``` python app.py see_allocations ``` to view people allocated to the rooms
+
+Run ``` python app.py see_room_occupants <room_name> ``` to view people in a parrticular room
 
 Run ``` python app.py --h ``` to get help on usage
 
