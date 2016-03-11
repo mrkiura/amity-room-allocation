@@ -26,23 +26,3 @@ class Occupant:
         occupant is a fellow
         '''
         return self.job_type
-
-    def allocate_room(self, room):
-        '''
-        allocates the occupant to the room
-        '''
-        self.room_name = room
-        self.allocated = True
-
-    def is_allocated(self):
-        '''
-        returns True for an occupant
-        allocated a room
-        '''
-        return self.allocated
-
-    def get_allocated_space(self):
-        '''
-        returns the space allocated to the occupant
-        '''
-        return self.room_name
