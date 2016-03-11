@@ -3,6 +3,7 @@ Usage:
     app.py allocate
     app.py get_allocation
     app.py see_allocations
+    app.py see_room_occupants <room_name>
     app.py --version
 Options:
     -h --help     Show this screen.
@@ -31,3 +32,6 @@ if __name__ == '__main__':
 
     if arguments['see_allocations']:
         premise.print_allocations()
+
+    if arguments['see_room_occupants']:
+        premise.get_room_members(arguments['<room_name>'])

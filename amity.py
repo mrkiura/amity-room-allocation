@@ -153,7 +153,6 @@ class Amity(object):
         '''
         for room in self.allocations:
             if room.name == room_name:
-                print(room.name)
+                print(room.name, '\n')
                 for i in room.occupants:
                     print(i)
-        print('No such room found :(')
