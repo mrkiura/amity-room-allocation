@@ -38,13 +38,11 @@ class Amity(object):
                     details = line.split()
                     occupant1 = Occupant(name=details[0] + ' ' + details[1],
                                          job_type=details[2])
-                    if details[2] == 'FELLOW':
-                        if details[-1] == 'Y':
+                    if details[2] == 'FELLOW' and details[-1] == 'Y':
                             self.boarding_fellows.append(occupant1)
-                        else:
-                            self.non_boarding_fellows.append(occupant1)
-                    else:
-                        self.staff.append(occupant1)
+                    elif details[-1] == 'N':
+                        self.non_boarding_fellows.append(occupant1)
+                    self.staff.append(occupant1)
 
     def allocate(self):
         '''
