@@ -39,7 +39,7 @@ class Amity(object):
                     occupant1 = Occupant(name=details[0] + ' ' + details[1],
                                          job_type=details[2])
                     if details[2] == 'FELLOW' and details[-1] == 'Y':
-                            self.boarding_fellows.append(occupant1)
+                        self.boarding_fellows.append(occupant1)
                     elif details[-1] == 'N':
                         self.non_boarding_fellows.append(occupant1)
                     self.staff.append(occupant1)
@@ -87,13 +87,15 @@ class Amity(object):
         '''
         available = []
         if usage == 'OFFICE':
-            for i in self.office_rooms:
-                if i.is_not_full():
-                    available.append(i)
+            office_gen = (office for office in
+                          self.office_rooms if office.is_not_full())
+            for i in office_gen:
+                available.append(i)
         else:
-            for i in self.living_rooms:
-                if i.is_not_full():
-                    available.append(i)
+            living_gen = (living for living in
+                          self.living_rooms if living.is_not_full())
+            for i in living_gen:
+                available.append(i)
         return available
 
     def get_allocations(self):
