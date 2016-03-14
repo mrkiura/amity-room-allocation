@@ -5,6 +5,7 @@ An office and living space allocation system. Made in response to checkpoint 1 r
 [![Coverage Status](https://coveralls.io/repos/github/andela-akiura/amity-room-allocation/badge.svg?branch=feature-review)](https://coveralls.io/github/andela-akiura/amity-room-allocation?branch=feature-review)
 [![Code Climate](https://codeclimate.com/github/andela-akiura/amity-room-allocation/badges/gpa.svg)](https://codeclimate.com/github/andela-akiura/amity-room-allocation)
 ![alt text](https://img.shields.io/badge/python-2.7-blue.svg)
+[![DUB](https://img.shields.io/dub/l/vibe-d.svg)]()
 
 ## Installation
 Clone the repo 
