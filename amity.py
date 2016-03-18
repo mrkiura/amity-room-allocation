@@ -87,12 +87,12 @@ class Amity(object):
         '''
         available = []
         if usage == 'OFFICE':
-            for i in self.office_rooms:
-                if i.is_not_full():
+            for i in [room for room in
+                      self.office_rooms if i.is_not_full()]:
                     available.append(i)
         else:
-            for i in self.living_rooms:
-                if i.is_not_full():
+            for i in [room for room in
+                      self.living_rooms if room.is_not_full()]:
                     available.append(i)
         return available
 
