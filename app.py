@@ -3,6 +3,11 @@ Usage:
     app.py allocate
     app.py get_allocation
     app.py see_allocations
+    app.py see_allocated
+    app.py get_unallocated
+    app.py see_unallocated
+    app.py see_occupants
+    app.py see_allocation_analysis
     app.py see_room_occupants <room_name>
     app.py --version
 Options:
@@ -35,3 +40,9 @@ if __name__ == '__main__':
 
     if arguments['see_room_occupants']:
         premise.get_room_members(arguments['<room_name>'])
+
+    if arguments['see_allocated']:
+        premise.print_allocated()
+
+    if arguments['see_allocation_analysis']:
+        premise.print_allocation_analysis()
