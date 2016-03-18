@@ -51,13 +51,9 @@ class Amity(object):
         Calls the methods to randomly allocate
         rooms to people
         '''
-        # give staff offices that are closer together
-        available_staff_offices = self.get_available_rooms('OFFICE')
-        self.allocate_rooms(available_staff_offices, self.staff)
-        # give fellows offices that are closer together
-        available_fellow_offices = self.get_available_rooms('OFFICE')
-        self.allocate_rooms(available_fellow_offices,
-                            self.boarding_fellows + self.non_boarding_fellows)
+        self.allocate_rooms(
+            self.office_rooms, self.boarding_fellows +
+            self.non_boarding_fellows + self.staff)
 
         # allocate rooms to boarding fellows
         available_living_rooms = self.get_available_rooms('LIVING')
@@ -135,13 +131,66 @@ class Amity(object):
                 print(person.name, end=', ')
             print('\n')
 
-    def get_unallocated(self):
+    def print_allocated(self):
+        '''
+        Prints a list of employees who have been
+        allocated roooms
+        '''
+        allocated_people = self.get_allocated_occupants()
+        for person in allocated_people:
+            print(person)
+
+    def get_allocated_occupants(self):
+        allocated = []
+        for room in self.allocations:
+            for occupant in room.occupants:
+                allocated.append((occupant.name, room.name))
+        return allocated
+
+    def analyze_allocations(self):
+        '''
+        Returns the number of rooms available,
+        number of total personnel, number of allocated vs
+        number of unallocated
+        '''
+        total_number_of_rooms = len(self.living_rooms + self.office_rooms)
+        number_of_allocated_rooms = len(self.allocations)
+        number_of_unallocated_rooms = total_number_of_rooms - \
+            number_of_allocated_rooms
+        number_of_total_occupants = len(self.staff +
+                                        self.non_boarding_fellows +
+                                        self.boarding_fellows)
+        number_of_allocated_occupants = len(self.get_allocated_occupants())
+        number_of_unaallocated_occupants = len(
+            self.get_unallocated_occupants())
+        return {'total rooms': total_number_of_rooms,
+                'allocated rooms': number_of_allocated_rooms,
+                'unallocated rooms': number_of_unallocated_rooms,
+                'total occupants': number_of_total_occupants,
+                'allocated occupants': number_of_allocated_occupants,
+                # 'unallocated occupants': number_of_unaallocated_occupants
+                }
+
+    def print_allocation_analysis(self):
+        print(self.analyze_allocations())
+
+    def print_unallocated(self):
+        '''
+        Prints a list of people
+        not allocated to any rooms
+        '''
+        pass
+        unallocated_people = self.get_unallocated()
+        for unallocated_person in unallocated_people:
+            print(unallocated_person)
+
+    def get_unallocated_occupants(self):
         '''
         Returns a list of occupants who
         are not allocated to any rooms
         '''
         allocated = []
-        for room in allocated:
+        for room in self.allocations:
             allocated += room.occupants
         return list(set(
             self.staff + self.boarding_fellows +
