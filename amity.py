@@ -137,11 +137,12 @@ class Amity(object):
     def print_allocated(self):
         '''
         Prints a list of employees who have been
-        allocated roooms
+        allocated roooms and returns it
         '''
         allocated_people = self.get_allocated_occupants()
         for person in allocated_people:
             print(person)
+        return allocated_people
 
     def get_allocated_occupants(self):
         allocated = []
