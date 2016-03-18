@@ -6,7 +6,6 @@ class AmityTest(unittest.TestCase):
 
     def setUp(self):
         self.building = Amity()
-        # import ipdb; ipdb.set_trace()
 
     def tearDown(self):
         self.building = None
