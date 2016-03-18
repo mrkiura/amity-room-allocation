@@ -32,7 +32,10 @@ class RoomTest(unittest.TestCase):
         self.assertIsInstance(result, str)
 
     def test_get_room_details(self):
-        self.assertIsInstance(self.room.get_room_details(), dict)
+        result = self.room.get_room_details()
+        self.assertTrue('name' in result)
+        self.assertTrue('capacity' in result)
+        self.assertTrue('occupants' in result)
 
     def test_room_usage(self):
         self.assertEqual(self.room.get_room_usage(), 'OFFICE')
