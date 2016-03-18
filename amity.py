@@ -10,14 +10,13 @@ class Amity(object):
     A class to model the Amity building which
     contains the various living and office spaces
     '''
-    office_rooms = []
-    living_rooms = []
-    boarding_fellows = []
-    non_boarding_fellows = []
-    staff = []
-    allocations = []
-
     def __init__(self):
+        self.office_rooms = []
+        self.living_rooms = []
+        self.boarding_fellows = []
+        self.non_boarding_fellows = []
+        self.staff = []
+        self.allocations = []
         # populate with model with rooms
         self.populate()
         # populate model with occupants
