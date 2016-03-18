@@ -64,18 +64,21 @@ class Amity(object):
         Allocates rooms to the list of people
         '''
         next_person = Occupants.next(people)
-        person = None
+        has_staff = True
         for room in rooms:
-            while room.is_not_full():
-                try:
-                    person = next_person.next()
-                    room.add_occupant(person)
-                except StopIteration:
-                    break
-
-            # update allocations if room has > 1 occupant
-            if len(room.occupants) > 0:
-                self.allocations.append(room)
+            if has_staff:
+                # if has_staff:
+                while room.is_not_full():
+                    try:
+                        person = next_person.next()
+                        room.add_occupant(person)
+                    except StopIteration:
+                        has_staff = False
+                        break
+                if len(room.occupants) > 0:
+                    self.allocations.append(room)
+            else:
+                break
 
     def get_available_rooms(self, usage):
         '''
