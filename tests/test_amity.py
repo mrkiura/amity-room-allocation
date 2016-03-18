@@ -56,3 +56,15 @@ class AmityTest(unittest.TestCase):
         '''
         self.assertTrue(
             len(self.building.get_unallocated_occupants()), 38)
+
+    def test_print_allocated(self):
+        self.assertEqual(len(self.building.print_allocated()), 100)
+
+    def test_analyse_allocations(self):
+        result = self.building.analyze_allocations()
+        self.assertTrue('total rooms' in result)
+        self.assertTrue('allocated rooms' in result)
+        self.assertTrue('total occupants' in result)
+        self.assertEqual(result['total rooms'], 20)
+        self.assertEqual(result['total occupants'], 114)
+        self.assertEqual(result['allocated occupants'], 100)
