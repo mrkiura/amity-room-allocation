@@ -51,13 +51,13 @@ class Amity(object):
         Calls the methods to randomly allocate
         rooms to people
         '''
+        # allocate office rooms
         self.allocate_rooms(
             self.office_rooms, self.boarding_fellows +
             self.non_boarding_fellows + self.staff)
 
-        # allocate rooms to boarding fellows
-        available_living_rooms = self.get_available_rooms('LIVING')
-        self.allocate_rooms(available_living_rooms, self.boarding_fellows)
+        # allcoate living rooms
+        self.allocate_rooms(self.living_rooms, self.boarding_fellows)
 
     def allocate_rooms(self, rooms, people):
         '''
@@ -168,7 +168,7 @@ class Amity(object):
                 'unallocated rooms': number_of_unallocated_rooms,
                 'total occupants': number_of_total_occupants,
                 'allocated occupants': number_of_allocated_occupants,
-                # 'unallocated occupants': number_of_unaallocated_occupants
+                'unallocated occupants': number_of_unaallocated_occupants
                 }
 
     def print_allocation_analysis(self):
