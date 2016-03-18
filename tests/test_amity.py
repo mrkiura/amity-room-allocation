@@ -57,6 +57,4 @@ class AmityTest(unittest.TestCase):
         Tests getting unallocated staff
         '''
         self.assertIsInstance(
-            self.building.get_unallocated(), list)
-
-
+            self.building.get_unallocated_occupants(), list)
