@@ -6,55 +6,54 @@ class AmityTest(unittest.TestCase):
 
     def setUp(self):
         self.building = Amity()
+        # import ipdb; ipdb.set_trace()
+
+    def tearDown(self):
+        self.building = None
 
     def test_populate_offices(self):
         '''
         Test whether the populate method
         populates the building with office rooms
         '''
-        self.building.populate()
-        self.assertTrue(len(self.building.office_rooms) > 0)
+        self.assertTrue(len(self.building.office_rooms), 10)
 
     def test_populate_living(self):
         '''
         Test whether the populate method
         populates the building with living rooms
         '''
-        self.building.populate()
-        self.assertTrue(len(self.building.living_rooms) > 0)
+        self.assertEqual(len(self.building.living_rooms), 10)
 
     def test_create_staff(self):
         '''
         Test create_occupants method
         '''
-        self.assertTrue(len(self.building.staff))
+        self.assertEqual(len(self.building.staff), 32)
 
     def test_create_fellows(self):
         '''
         Test create_occupants method
         '''
-        self.building.create_occupants()
-        self.assertTrue(
-            len(self.building.boarding_fellows +
-                self.building.non_boarding_fellows) > 0)
+        fellows = len(self.building.boarding_fellows +
+                      self.building.non_boarding_fellows)
+        self.assertEqual(fellows, 82)
 
     def test_allocate(self):
         '''
         Tests allocate method
         '''
-        self.building.allocate()
-        self.assertTrue(len(self.building.get_allocations()) > 0)
+        self.assertEqual(len(self.building.get_allocations()), 20)
 
     def test_get_available_room(self):
         '''
         Tests getting available rooms
         '''
-        self.assertIsInstance(
-            self.building.get_available_rooms('LIVING'), list)
+        self.assertEqual(len(self.building.get_available_rooms('LIVING')), 0)
 
     def test_get_unallocated(self):
         '''
         Tests getting unallocated staff
         '''
-        self.assertIsInstance(
-            self.building.get_unallocated_occupants(), list)
+        self.assertTrue(
+            len(self.building.get_unallocated_occupants()), 38)
